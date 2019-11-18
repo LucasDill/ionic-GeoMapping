@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { NavController } from 'ionic-angular';
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -25,29 +26,50 @@ export class HomePage {
 clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
-  
+  markers=undefined;
+  travel=undefined;
   mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true
-    });
+    this.markers={
+      Marklat: $event.coords.lat,
+      Marklng: $event.coords.lng,
+      Markdraggable: true
+    }
+    const start= new google.maps.LatLng(this.markers.Marklat,this.markers.Marklng);
+    const end= new google.maps.LatLng(this.lat,this.lng);
+    var distance= google.maps.geometry.spherical.computeDistanceBetween(start,end);
+    distance=distance/1000;
+    var dist=distance.toFixed(2)
+    document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
+    console.log(distance)
+   
+   let geocoder= new google.maps.Geocoder;
+   let latlng={lat:this.markers.Marklat,lng: this.markers.Marklng};
+   geocoder.geocode({'location':latlng}, (results, status)=> {
+     console.log(results);
+     if(results[0].formatted_address!=null)
+     {
+      document.getElementById("address").innerText=(results[0].formatted_address);
+     }
+     else{
+       document.getElementById("address").innerText="No Adress Available";
+     }
+     
+   })
+  }
+
+  markerDragEnd( markers, $event: MouseEvent) {
+    console.log('dragEnd', markers, $event);
+    this.markers.Marklat=$event.coords.lat;
+    this.markers.Marklng=$event.coords.lng;
   }
   
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-    m.lat=$event.coords.lat;
-    m.lng=$event.coords.lng;
-  }
+
   
-  markers: marker[] = [
-	  
-  ]
 }
 
 // just an interface for type safety.
 interface marker {
-	lat: number;
-	lng: number;
-	draggable: boolean;
+	Marklat: number;
+	Marklng: number;
+	Markdraggable: boolean;
 }

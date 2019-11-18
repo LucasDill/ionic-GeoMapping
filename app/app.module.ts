@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AgmCoreModule } from '@agm/core';
 import { MyApp } from './app.component';
+import {} from 'google-maps';
+
+
+
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -21,7 +25,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     BrowserModule,
     IonicModule.forRoot(MyApp),
      AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC2GRIwOatzPmiamkpv3znVK8hi9g4lGoU'
+      apiKey: 'AIzaSyC2GRIwOatzPmiamkpv3znVK8hi9g4lGoU',
+      libraries: ['geometry']
     })
   ],
   bootstrap: [IonicApp],
