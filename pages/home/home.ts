@@ -24,7 +24,7 @@ export class HomePage {
   }
 
 clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+   // console.log(`clicked the marker: ${label || index}`)
   }
   markers=undefined;
   travel=undefined;
@@ -40,12 +40,12 @@ clickedMarker(label: string, index: number) {
     distance=distance/1000;
     var dist=distance.toFixed(2)
     document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
-    console.log(distance)
+   // console.log(distance)
    
    let geocoder= new google.maps.Geocoder;
    let latlng={lat:this.markers.Marklat,lng: this.markers.Marklng};
    geocoder.geocode({'location':latlng}, (results, status)=> {
-     console.log(results);
+     //console.log(results);
      if(results[0].formatted_address!=null)
      {
       document.getElementById("address").innerText=(results[0].formatted_address);
@@ -61,6 +61,13 @@ clickedMarker(label: string, index: number) {
     console.log('dragEnd', markers, $event);
     this.markers.Marklat=$event.coords.lat;
     this.markers.Marklng=$event.coords.lng;
+    const start= new google.maps.LatLng($event.coords.lat,$event.coords.lng);
+    //const end= new google.maps.LatLng(this.lat,this.lng);
+    var distance= google.maps.geometry.spherical.computeDistanceBetween(start,end);
+    distance=distance/1000;
+    var dist=distance.toFixed(2)
+    document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
+   // console.log(distance)
   }
   
 
