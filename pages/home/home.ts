@@ -22,9 +22,8 @@ export class HomePage {
   //origin= { lat: 24.799448, lng: 120.979021 };
   //destination= { lat: 24.799524, lng: 120.975017 };
   constructor(public navCtrl: NavController) {
-
   }
-
+directionsService = new google.maps.DirectionsService;
 
 
 clickedMarker(label: string, index: number) {
@@ -59,7 +58,24 @@ clickedMarker(label: string, index: number) {
      }
      
    })
+   this.calcRoute(start,end);
   }
+calcRoute(start,end) {
+    this.directionsService.route({
+      origin: start,
+      destination: end,
+      travelMode: 'DRIVING'
+    }, (response, status) => {
+      if (status === 'OK') {
+        var dist=response.routes[0].legs[0].distance.text;
+        var time=response.routes[0].legs[0].duration.text;
+        document.getElementById("Route").innerText="Distance by Road to TBRHSC: "+dist+"\nTime By road to TBRHSC: "+time;
+      } else {
+        document.getElementById("Route").innerText='Directions request failed due to ' + status;
+      }
+    });
+  }
+
 
   markerDragEnd( markers, $event: MouseEvent) {
     console.log('dragEnd', markers, $event);
@@ -72,6 +88,7 @@ clickedMarker(label: string, index: number) {
     var dist=distance.toFixed(2)
     document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
    // console.log(distance)
+   this.calcRoute(start,end);
   }
   
 
