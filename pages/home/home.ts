@@ -70,8 +70,8 @@ calcRoute(start,end) {
         var dist=response.routes[0].legs[0].distance.text;
         var time=response.routes[0].legs[0].duration.text;
         document.getElementById("Route").innerText="Distance by Road to TBRHSC: "+dist+"\nTime By road to TBRHSC: "+time;
-      } else {
-        document.getElementById("Route").innerText='Directions request failed due to ' + status;
+      } else if(status="ZERO_RESULTS") {
+        document.getElementById("Route").innerText='No Route Available by Road Status: '+status;
       }
     });
   }
