@@ -12,7 +12,8 @@
   [disableDefaultUI]="false"
   [zoomControl]="false"
   (mapClick)="mapClicked($event)">
-
+<!--<agm-direction [origin]="{ lat:48.425185, lng:-89.269674 }" [destination]="{ lat:51.052508, lng:-114.203457 }">
+</agm-direction>-->
   <agm-marker 
       *ngIf="markers"
       (markerClick)="clickedMarker(markers.label, i)"

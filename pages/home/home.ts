@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { NavController } from 'ionic-angular';
-
+import {AgmDirectionModule} from 'agm-direction';
 
 @Component({
   selector: 'page-home',
@@ -19,9 +19,13 @@ export class HomePage {
   // initial center position for the map
   lat: number = 48.425185;
   lng: number = -89.269674;
+  //origin= { lat: 24.799448, lng: 120.979021 };
+  //destination= { lat: 24.799524, lng: 120.975017 };
   constructor(public navCtrl: NavController) {
 
   }
+
+
 
 clickedMarker(label: string, index: number) {
    // console.log(`clicked the marker: ${label || index}`)
@@ -62,7 +66,7 @@ clickedMarker(label: string, index: number) {
     this.markers.Marklat=$event.coords.lat;
     this.markers.Marklng=$event.coords.lng;
     const start= new google.maps.LatLng($event.coords.lat,$event.coords.lng);
-    //const end= new google.maps.LatLng(this.lat,this.lng);
+    const end= new google.maps.LatLng(this.lat,this.lng);
     var distance= google.maps.geometry.spherical.computeDistanceBetween(start,end);
     distance=distance/1000;
     var dist=distance.toFixed(2)
