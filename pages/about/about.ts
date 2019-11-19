@@ -13,8 +13,8 @@ export class AboutPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  start = 'chicago, il';
-  end = 'chicago, il';
+  start = {lat: 51.047118,lng:-114.201098};
+  end = {lat: 48.424889,lng: -89.270721};
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
 
@@ -29,7 +29,7 @@ export class AboutPage {
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
+      center: {lat: 48.424889, lng: -89.270721}
     });
 
     this.directionsDisplay.setMap(this.map);

@@ -19,8 +19,7 @@ export class HomePage {
   // initial center position for the map
   lat: number = 48.425185;
   lng: number = -89.269674;
-  //origin= { lat: 24.799448, lng: 120.979021 };
-  //destination= { lat: 24.799524, lng: 120.975017 };
+
   constructor(public navCtrl: NavController) {
   }
 directionsService = new google.maps.DirectionsService;
