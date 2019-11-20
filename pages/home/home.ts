@@ -25,6 +25,7 @@ export class HomePage {
 directionsService = new google.maps.DirectionsService;
 
 
+
 clickedMarker(label: string, index: number) {
    // console.log(`clicked the marker: ${label || index}`)
   }
