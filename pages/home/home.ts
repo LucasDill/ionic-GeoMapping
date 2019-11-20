@@ -22,7 +22,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController) {
   }
-directionsService = new google.maps.DirectionsService;
+//directionsService = new google.maps.DirectionsService;
 
 
 
@@ -61,7 +61,8 @@ clickedMarker(label: string, index: number) {
    this.calcRoute(start,end);
   }
 calcRoute(start,end) {
-    this.directionsService.route({
+     var directionsService = new google.maps.DirectionsService;
+    directionsService.route({
       origin: start,
       destination: end,
       travelMode: 'DRIVING'
