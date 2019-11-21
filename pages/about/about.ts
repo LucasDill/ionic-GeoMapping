@@ -13,8 +13,6 @@ export class AboutPage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  start = {lat: 51.047118,lng:-114.201098};
-  end = {lat: 48.424889,lng: -89.270721};
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
 
@@ -28,8 +26,9 @@ export class AboutPage {
 
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 7,
-      center: {lat: 48.424889, lng: -89.270721}
+      zoom: 8,
+      center: {lat: 48.424889, lng: -89.270721},
+    
     });
    // this.addMarker(this.map);
 
@@ -71,26 +70,7 @@ export class AboutPage {
   });
   infowindow.open(map,marker);
 }
-   // var distance= google.maps.geometry.spherical.computeDistanceBetween(start,end);
-   // distance=distance/1000;
-   // var dist=distance.toFixed(2)
-   // document.getElementById("Dist").innerText="Straight Line Distance: "+dist+" Km";
-   // console.log(distance)
-   
-   //let geocoder= new google.maps.Geocoder;
-  // let latlng={lat:this.markers.Marklat,lng: this.markers.Marklng};
-  // geocoder.geocode({'location':latlng}, (results, status)=> {
-     //console.log(results);
-   //  if(results[0].formatted_address!=null)
-   //  {
-    //  document.getElementById("address").innerText=(results[0].formatted_address);
-   //  }
-   //  else{
-      // document.getElementById("address").innerText="No Adress Available";
-  //   }
-     
-   //})
-   //this.calcRoute(start,end);
+
   }
 
   calculateAndDisplayRoute() {
@@ -101,6 +81,9 @@ export class AboutPage {
     }, (response, status) => {
       if (status === 'OK') {
         this.directionsDisplay.setDirections(response);
+        var dist=response.routes[0].legs[0].distance.text;
+        var time=response.routes[0].legs[0].duration.text;
+        document.getElementById("display").innerText="Distance by Road to "+this.end +": "+dist+"\nTime By Road to "+this.end+": "+time;
       } else {
         window.alert('Directions request failed due to ' + status);
       }
