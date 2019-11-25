@@ -30,17 +30,17 @@ export class AboutPage {
       center: {lat: 48.424889, lng: -89.270721},
     
     });
-   // this.addMarker(this.map);
+    this.addMarker(this.map);
 
     this.directionsDisplay.setMap(this.map);
   }
-  addMarker(map:any,latling){
+  addMarker(map:any){
     let marker=new google.maps.Marker({
       map: map,
       animation: google.maps.Animation.DROP,
-      position: latling
+      position: {lat:48.32545,lng:-89.265}
     });
-    let content="<h4>Information!</h4>";
+    let content="<h4>Markers are here</h4>";
     this.addInfoWindow(marker,content);
   }
 
