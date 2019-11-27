@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 import {AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 declare var google;
+var gmarkers;
+gmarkers = [];
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -28,8 +30,13 @@ this.getDataFromFirebase();
 this.getData();
 
 
+
   }
   items;
+
+
+
+  
   getDataFromFirebase(){
     this.DataBase.list('/Medical_Centers/').valueChanges().subscribe(
       data =>{
@@ -113,16 +120,65 @@ this.getData();
       }
     });
   }
+  
 AddHospitals(e)
 {
+
+
+      
   if(e._value==true)
   {
     //add markers 
+
+this.DataBase.list('/Medical_Centers/').valueChanges().subscribe(
+      data =>{
+        console.log(data[3].lat)
+        this.items = data
+
+var icon = {
+    url: 'https://287x912zvqyps9a1m2sjek0l-wpengine.netdna-ssl.com/wp-content/uploads/2016/08/Hospital-Symbol.png', // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+   
+};
+
+
+for (var i = 0; i < data.length; i++){
+if(data[i].bHospital = 'true'){
+  let marker1=new google.maps.Marker({
+     
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat:data[i].lat,lng:data[i].lng},
+      icon: icon
+
+    });
+
+    let content= data[i].name + "<br>" + data[i].address;
+    this.addInfoWindow(marker1,content);
+
+    gmarkers.push(marker1);
+    
+}
+
+
+      }
+      }
+    )
+  
+
+
   }
+  
   else if(e._value==false)
 {
   //remove markers
+
+
+    for(var i=0; i<gmarkers.length; i++)
+        gmarkers[i].setMap(null);
+    
 }
+
 }
 AddHealthService(e)
 {
