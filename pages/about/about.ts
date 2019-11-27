@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
+//import {AngularFireDatabase, AngularFireList } from '@angularfire2/database';
 
 declare var google;
 
@@ -15,9 +16,10 @@ export class AboutPage {
   map: any;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
+//public hospital: AngularFireList<any>;
 
   constructor(public navCtrl: NavController) {
-
+//this.hospital=DataBase.list('/Medical_Centers')
   }
 
   ionViewDidLoad(){
@@ -89,5 +91,70 @@ export class AboutPage {
       }
     });
   }
-
+AddHospitals(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
+AddHealthService(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
+AddHele(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
+AddAirport(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
+AddAmbBase(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
+AddORNGE(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+  }
+  else if(e._value==false)
+{
+  //remove markers
+}
+}
 }

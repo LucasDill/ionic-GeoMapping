@@ -14,6 +14,17 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
+const firebaseConfig={
+      apiKey: "AIzaSyC2GRIwOatzPmiamkpv3znVK8hi9g4lGoU",
+        authDomain: "geo-mapping-proj-1574028047763.firebaseapp.com",
+        databaseURL: "https://geo-mapping-proj-1574028047763.firebaseio.com",
+        projectId: "geo-mapping-proj-1574028047763",
+        storageBucket: "geo-mapping-proj-1574028047763.appspot.com",
+        messagingSenderId: "712405217170",
+        appId: "1:712405217170:web:a223f8f2320eb644b4db4b",
+        measurementId: "G-9D0R7N8P3V" 
+}
+
 @NgModule({
   declarations: [
     MyApp,

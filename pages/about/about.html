@@ -23,5 +23,51 @@
     </select>
     </div>
     <div #map id="map" style="height: 50%;" (mapClick)="onMapClick($event)"></div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class=bar bar-header bar-positive>
+            <h1 class="title">Controls</h1>
+            </div>
+          <div>
+            <ion-item>
+              <ion-label>Hospital Markers</ion-label>
+            <ion-checkbox (ionChange)="AddHospitals($event)"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>TeleStroke Markers</ion-label>
+            <ion-checkbox></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Health Service Markers</ion-label>
+            <ion-checkbox (ionChange)="AddHealthService($event)"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Helipad Markers Markers</ion-label>
+            <ion-checkbox (ionChange)="AddHele($event)"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>AirPort Markers</ion-label>
+            <ion-checkbox (ionChange)="AddAirport($event)"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Ambulance Base Markers</ion-label>
+            <ion-checkbox (ionChange)="AddAmbBase($event)"></ion-checkbox>
+            </ion-item> 
+            <ion-item>
+              <ion-label>ORNGE Base Markers</ion-label>
+            <ion-checkbox (ionChange)="AddORNGE($event)"></ion-checkbox>
+            </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     <p id="display"></p>
 </ion-content>
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use-->
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
