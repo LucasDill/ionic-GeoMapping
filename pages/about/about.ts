@@ -1,9 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
-//import {AngularFireDatabase, AngularFireList } from '@angularfire2/database';
+import {AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 declare var google;
+
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 @IonicPage()
 @Component({
@@ -11,15 +15,33 @@ declare var google;
   templateUrl: 'about.html'
 })
 export class AboutPage {
-
+public hospital: AngularFireList<any>;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
-//public hospital: AngularFireList<any>;
 
-  constructor(public navCtrl: NavController) {
-//this.hospital=DataBase.list('/Medical_Centers')
+
+  constructor(public navCtrl: NavController, public DataBase: AngularFireDatabase ) {
+this.hospital=DataBase.list('/Medical_Centers')
+this.getDataFromFirebase();
+this.getData();
+
+
+  }
+  items;
+  getDataFromFirebase(){
+    this.DataBase.list('/Medical_Centers/').valueChanges().subscribe(
+      data =>{
+        console.log(data[3].lat)
+        this.items = data
+      }
+    )
+  }
+  getData(){
+    firebase.database().ref('/Medical_Centers/').once('value').then(function(data){
+    console.log(JSON.stringify(data.val()));
+    })
   }
 
   ionViewDidLoad(){
