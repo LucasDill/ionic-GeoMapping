@@ -4,8 +4,11 @@ import { NavController } from 'ionic-angular';
 import {AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
 declare var google;
-var gmarkers;
+var gmarkers, gmarkers2,gmarkers3, gmarkers4;
 gmarkers = [];
+gmarkers2 = [];
+gmarkers3 = [];
+gmarkers4 = [];
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -141,9 +144,15 @@ var icon = {
    
 };
 
+var icon2 = {
+    url: 'https://www.pinclipart.com/picdir/middle/150-1503142_greek-mythology-medusa-symbol-clipart.png', // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+   
+};
 
 for (var i = 0; i < data.length; i++){
-if(data[i].bHospital = 'true'){
+   console.log(data[i].bHospital)
+if(data[i].bHospital == true && data[i].bRegionalStrokeCentre == false){
   let marker1=new google.maps.Marker({
      
       map: this.map,
@@ -159,6 +168,23 @@ if(data[i].bHospital = 'true'){
     gmarkers.push(marker1);
     
 }
+else if(data[i].bRegionalStrokeCentre == true){
+  let markerTB=new google.maps.Marker({
+     
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat:data[i].lat,lng:data[i].lng},
+      icon: icon2
+
+    });
+
+    let content= data[i].name + "<br>" + data[i].address;
+    this.addInfoWindow(markerTB,content);
+
+    gmarkers.push(markerTB);
+
+}
+
 
 
       }
@@ -180,28 +206,159 @@ if(data[i].bHospital = 'true'){
 }
 
 }
+AddTele(e)
+{
+  if(e._value==true)
+  {
+    //add markers 
+this.DataBase.list('/Medical_Centers/').valueChanges().subscribe(
+      data =>{
+        this.items = data
+
+var icon = {
+    url: 'https://www.freeiconspng.com/uploads/letter-t-icon-png-18.png', // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+   
+};
+
+
+for (var i = 0; i < data.length; i++){
+if(data[i].bTelestroke == true){
+  let marker2=new google.maps.Marker({
+     
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat:data[i].lat,lng:data[i].lng},
+      icon: icon
+
+    });
+
+    let content= data[i].name + "<br>" + data[i].address;
+    this.addInfoWindow(marker2,content);
+
+    gmarkers2.push(marker2);
+    
+}
+
+      }
+      }
+    )
+  
+
+
+  }
+  
+  else if(e._value==false)
+{
+  //remove markers
+
+
+    for(var i=0; i<gmarkers2.length; i++)
+        gmarkers2[i].setMap(null);
+    
+}
+}
 AddHealthService(e)
 {
   if(e._value==true)
   {
     //add markers 
+this.DataBase.list('/Medical_Centers/').valueChanges().subscribe(
+      data =>{
+        this.items = data
+
+var icon = {
+    url: 'https://f-scope.net/images/health-services-png-1.png', // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+   
+};
+
+
+for (var i = 0; i < data.length; i++){
+if(data[i].bHealthServices == true){
+  let marker3=new google.maps.Marker({
+     
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat:data[i].lat,lng:data[i].lng},
+      icon: icon
+
+    });
+
+    let content= data[i].name + "<br>" + data[i].address;
+    this.addInfoWindow(marker3,content);
+
+    gmarkers3.push(marker3);
+    
+}
+
+      }
+      }
+    )
+  
+
+
   }
+  
   else if(e._value==false)
 {
   //remove markers
+
+
+    for(var i=0; i<gmarkers3.length; i++)
+        gmarkers3[i].setMap(null);
+    
 }
 }
+
 AddHele(e)
 {
+  {
   if(e._value==true)
   {
     //add markers 
+this.DataBase.list('/Landing Sites/').valueChanges().subscribe(
+      data =>{
+        this.items = data
+
+var icon = {
+    url: 'https://f-scope.net/images/health-services-png-1.png', // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+   
+};
+
+for (var i = 0; i < data.length; i++){
+if(data[i].type == "Helipad"){
+  let marker4=new google.maps.Marker({
+     
+      map: this.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat:data[i].lat,lng:data[i].lng},
+      icon: icon
+    });
+
+    let content= data[i].name + "<br>" + data[i].address;
+    this.addInfoWindow(marker4,content);
+
+    gmarkers4.push(marker4);
+    
+}
+        }
+      }
+    )
   }
   else if(e._value==false)
-{
+    {
   //remove markers
+
+
+    for(var i=0; i<gmarkers.length; i++)
+        gmarkers4[i].setMap(null);
+    
+    }
+  }
 }
-}
+
 AddAirport(e)
 {
   if(e._value==true)
