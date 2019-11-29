@@ -162,7 +162,7 @@ if(data[i].bHospital == true && data[i].bRegionalStrokeCentre == false){
 
     });
 
-    let content= data[i].name + "<br>" + data[i].address;
+    let content= "<b>Name:</b> "+data[i].name + "<br>"+"<b>Address:</b> " + data[i].address;
     this.addInfoWindow(marker1,content);
 
     gmarkers.push(marker1);
@@ -178,7 +178,7 @@ else if(data[i].bRegionalStrokeCentre == true){
 
     });
 
-    let content= data[i].name + "<br>" + data[i].address;
+    let content="<b>Name:</b> " + data[i].name + "<br>"+"<b>Address:</b> " + data[i].address;
     this.addInfoWindow(markerTB,content);
 
     gmarkers.push(markerTB);
@@ -233,7 +233,7 @@ if(data[i].bTelestroke == true){
 
     });
 
-    let content= data[i].name + "<br>" + data[i].address;
+    let content="<b>Name:</b> " +data[i].name + "<br>" +"<b>Address:</b> "+ data[i].address;
     this.addInfoWindow(marker2,content);
 
     gmarkers2.push(marker2);
@@ -285,7 +285,7 @@ if(data[i].bHealthServices == true){
 
     });
 
-    let content= data[i].name + "<br>" + data[i].address;
+    let content="<b>Name:</b> "+ data[i].name + "<br>"+"<b>Address:</b> " + data[i].address;
     this.addInfoWindow(marker3,content);
 
     gmarkers3.push(marker3);
@@ -322,7 +322,7 @@ this.DataBase.list('/Landing Sites/').valueChanges().subscribe(
         this.items = data
 
 var icon = {
-    url: 'https://f-scope.net/images/health-services-png-1.png', // url
+    url: 'https://cdn0.iconfinder.com/data/icons/medical-line-vol-2/56/helipad__landing__helicopter__emergency__fly-512.png', // url
     scaledSize: new google.maps.Size(25, 25), // scaled size
    
 };
@@ -333,11 +333,11 @@ if(data[i].type == "Helipad"){
      
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: {lat:data[i].lat,lng:data[i].lng},
+      position: {lat:parseFloat(data[i].lat),lng:data[i].lng},//parsefloat is temporary need to fix write to database 
       icon: icon
     });
 
-    let content= data[i].name + "<br>" + data[i].address;
+    let content= "<b>Site Name:</b> "+data[i].siteName + "<br>" +"<b>Address:</b> " +data[i].Address+"<br>"+"<b>Identifier:</b> "+data[i].ident;
     this.addInfoWindow(marker4,content);
 
     gmarkers4.push(marker4);
@@ -352,7 +352,7 @@ if(data[i].type == "Helipad"){
   //remove markers
 
 
-    for(var i=0; i<gmarkers.length; i++)
+    for(var i=0; i<gmarkers4.length; i++)
         gmarkers4[i].setMap(null);
     
     }
