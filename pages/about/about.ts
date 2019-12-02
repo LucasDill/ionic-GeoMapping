@@ -333,7 +333,7 @@ if(data[i].type == "Helipad"){
      
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: {lat:parseFloat(data[i].lat),lng:data[i].lng},//parsefloat is temporary need to fix write to database 
+      position: {lat:data[i].lat,lng:data[i].lng},//parsefloat is temporary need to fix write to database 
       icon: icon
     });
 
